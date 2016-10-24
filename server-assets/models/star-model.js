@@ -19,6 +19,10 @@ let Star = DS.defineResource({
             planet: {
                 localField: 'planets',
                 foreignKey: 'starId'
+            },
+            moon: {
+                localField: 'moons',
+                foreignKey: 'starId'
             }
         }
     }

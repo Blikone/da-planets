@@ -32,14 +32,14 @@ let Planet = DS.defineResource({
 
 function create(planet, cb) {
     // Use the Resource Model to create a new planet
-    DS.find('star', planet.starId).then(function(star) {
-        Planet.create({ 
-            id: uuid.v4(), 
-            name: planet.name, 
-            galaxyId: star.galaxyId, 
-            starId: planet.starId 
+    DS.find('star', planet.starId).then(function (star) {
+        Planet.create({
+            id: uuid.v4(),
+            name: planet.name,
+            galaxyId: star.galaxyId,
+            starId: planet.starId
         })
-        .then(cb).catch(cb)
+            .then(cb).catch(cb)
     }).catch(cb)
 }
 
