@@ -14,7 +14,7 @@ let Creature = DS.defineResource({
                 localField: 'galaxies',
                 localKeys: 'galaxyIds'
             },{
-                localfield:'knownGalaxies',
+                localField:'knownGalaxies',
                 foreignKeys: 'creatureIds'
             }]
         }
@@ -55,12 +55,12 @@ function inhabitGalaxy(creatureId, galaxyId, cb) {
 
 function getAll(query, cb) {
     //Use the Resource Model to get all Galaxies
-    Galaxy.findAll({}).then(cb).catch(cb)
+    Creature.findAll({}).then(cb).catch(cb)
 }
 
 function getById(id, query, cb) {
     // use the Resource Model to get a single galaxy by its id
-    Galaxy.find(id, formatQuery(query)).then(cb).catch(cb)
+    Creature.find(id, formatQuery(query)).then(cb).catch(cb)
 }
 
 
