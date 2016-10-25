@@ -19,6 +19,8 @@ let Creature = DS.defineResource({
 })
 
 function create(creature, cb) {
+
+
     let creatureObj = {
         id: uuid.v4(),
         name: creature.name,
@@ -26,6 +28,25 @@ function create(creature, cb) {
     }
 
     Creature.create(creatureObj).then(cb).catch(cb)
+}
+
+
+function inhabitGalaxy(creatureId, galaxyId, cb) {
+    DS.find('galaxy', galaxyId).then(function(galaxy) {
+        Creature.find(creatureId).then(function(creature) {
+
+            creature.galaxyIds[galaxyId] = galaxyId;
+            galaxy.creatureIds = galaxy.creatureIds || {};
+            galaxy.creatureIds[creatureId] = creatureId;
+
+            Creature.update(creature.id, creature).then(function() {
+                DS.update('galaxy', galaxy.id, galaxy)
+                    .then(cb)
+                    .catch(cb)
+            }).catch(cb)
+
+        }).catch(cb)
+    }).catch(cb)
 }
 
 function getAll(query, cb) {
@@ -42,5 +63,6 @@ function getById(id, query, cb) {
 module.exports = {
     create,
     getAll,
-    getById
+    getById,
+    inhabitGalaxy
 }
