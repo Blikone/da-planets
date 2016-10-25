@@ -21,6 +21,10 @@ let Galaxy = DS.defineResource({
             moon: {
                 localField: 'moons',
                 foreignKey: 'galaxyId'
+            },
+            species: {
+                localField: 'species',
+                foreignKeys: 'galaxyIds'
             }
         }
     }

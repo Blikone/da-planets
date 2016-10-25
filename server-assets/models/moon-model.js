@@ -27,7 +27,6 @@ let Moon = DS.defineResource({
     }
 })
 
-
 function create(moon, cb) {
     // Use the Resource Model to create a new moon
     DS.find('planet', moon.planetId).then(function (planet) {
