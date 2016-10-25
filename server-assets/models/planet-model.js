@@ -24,7 +24,15 @@ let Planet = DS.defineResource({
             moon: {
                 localField: 'moons',
                 foreignKey: 'planetId'
-            }
+            },
+            creature: [
+            {
+                localField: 'creatures',
+                foreignKeys: 'locationIds'
+            },{
+                localField: 'knownCreatures',
+                foreignKeys: 'creatureIds'
+            }]
         }
     }
 })

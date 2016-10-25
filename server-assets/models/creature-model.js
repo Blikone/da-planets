@@ -10,11 +10,11 @@ let Creature = DS.defineResource({
     filepath: __dirname + '/../data/creatures.db',
     relations: {
         hasMany: {
-            galaxy: [{
-                localField: 'galaxies',
-                localKeys: 'galaxyIds'
-            },{
-                localField:'knownGalaxies',
+            location: [{
+                localField: 'locations',
+                localKeys: 'locationIds'
+            }, {
+                localField: 'knownLocations',
                 foreignKeys: 'creatureIds'
             }]
         }
@@ -27,7 +27,7 @@ function create(creature, cb) {
     let creatureObj = {
         id: uuid.v4(),
         name: creature.name,
-        galaxyIds: {}
+        locationIds: {}
     }
 
     Creature.create(creatureObj).then(cb).catch(cb)
@@ -35,43 +35,68 @@ function create(creature, cb) {
 
 
 
-function inhabitGalaxy(creatureId, galaxyId, cb) {
-    DS.find('galaxy', galaxyId).then(function(galaxy) {
-        Creature.find(creatureId).then(function(creature) {
+// function inhabitGalaxy(creatureId, galaxyId, cb) {
+//     DS.find('galaxy', galaxyId).then(function (galaxy) {
+//         Creature.find(creatureId).then(function (creature) {
 
-            creature.galaxyIds[galaxyId] = galaxyId;
-            galaxy.creatureIds = galaxy.creatureIds || {};
-            galaxy.creatureIds[creatureId] = creatureId;
+//             creature.galaxyIds[galaxyId] = galaxyId;
+//             galaxy.creatureIds = galaxy.creatureIds || {};
+//             galaxy.creatureIds[creatureId] = creatureId;
 
-            Creature.update(creature.id, creature).then(function() {
-                DS.update('galaxy', galaxy.id, galaxy)
-                    .then(cb)
-                    .catch(cb)
-            }).catch(cb)
+//             Creature.update(creature.id, creature).then(function () {
+//                 DS.update('galaxy', galaxy.id, galaxy)
+//                     .then(cb)
+//                     .catch(cb)
+//             }).catch(cb)
 
-        }).catch(cb)
-    }).catch(cb)
-}
+//         }).catch(cb)
+//     }).catch(cb)
+// }
 
 function inhabitLocation(creatureId, locationId, cb) {
-    DS.find('moon', moonId).then(function(moon) {
-        Creature.find(creatureId).then(function(creature) {
+    DS.find('moon', locationId).then(function (moon) {
+        Creature.find(creatureId).then(function (creature) {
+            creature.locationIds = creature.locationIds || {};
             creature.locationIds[locationId] = locationId;
             moon.creatureIds = moon.creatureIds || {};
             moon.creatureIds[creatureId] = creatureId;
-            Creature.update(creature.id, creature).then(function() {
+            Creature.update(creature.id, creature).then(function () {
                 DS.update('moon', moon.id, moon)
             })
         }).catch(cb)
-    }).catch(function() {
-        DS.find('planet', planetId).then(function(planet) {
-            Creature.find(creatureId).then(function(creature) {})
-        }).catch(function() {
-            DS.find('star', starId).then(function(star) {
-                Creature.find(creatureId).then(function(creature) {})
-            }).catch(function() {
-                DS.find('galaxy', galaxyId).then(function(galaxy) {
-                    Creature.find(creatureId).then(function(creature) {})
+    }).catch(function () {
+        DS.find('planet', locationId).then(function (planet) {
+            Creature.find(creatureId).then(function (creature) {
+                creature.locationIds = creature.locationIds || {};
+                creature.locationIds[locationId] = locationId;
+                planet.creatureIds = planet.creatureIds || {};
+                planet.creatureIds[creatureId] = creatureId;
+                Creature.update(creature.id, creature).then(function () {
+                    DS.update('planet', planet.id, planet)
+                })
+            }).catch(cb)
+        }).catch(function () {
+            DS.find('star', locationId).then(function (star) {
+                Creature.find(creatureId).then(function (creature) {
+                    creature.locationIds = creature.locationIds || {};
+                    creature.locationIds[locationId] = locationId;
+                    star.creatureIds = star.creatureIds || {};
+                    star.creatureIds[creatureId] = creatureId;
+                    Creature.update(creature.id, creature).then(function () {
+                        DS.update('star', star.id, star)
+                    })
+                }).catch(cb)
+            }).catch(function () {
+                DS.find('galaxy', locationId).then(function (galaxy) {
+                    Creature.find(creatureId).then(function (creature) {
+                        creature.locationIds = creature.locationIds || {};
+                        creature.locationIds[locationId] = locationId;
+                        galaxy.creatureIds = galaxy.creatureIds || {};
+                        galaxy.creatureIds[creatureId] = creatureId;
+                        Creature.update(creature.id, creature).then(function () {
+                            DS.update('galaxy', galaxy.id, galaxy)
+                        })
+                    }).catch(cb)
                 }).catch(cb)
             })
         })
@@ -93,5 +118,5 @@ module.exports = {
     create,
     getAll,
     getById,
-    inhabitGalaxy
+    inhabitLocation
 }

@@ -25,7 +25,7 @@ let Galaxy = DS.defineResource({
             creature: [
             {
                 localField: 'creatures',
-                foreignKeys: 'galaxyIds'
+                foreignKeys: 'locationIds'
             },{
                 localField: 'knownCreatures',
                 foreignKeys: 'creatureIds'
