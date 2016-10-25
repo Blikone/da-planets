@@ -53,6 +53,31 @@ function inhabitGalaxy(creatureId, galaxyId, cb) {
     }).catch(cb)
 }
 
+function inhabitLocation(creatureId, locationId, cb) {
+    DS.find('moon', moonId).then(function(moon) {
+        Creature.find(creatureId).then(function(creature) {
+            creature.locationIds[locationId] = locationId;
+            moon.creatureIds = moon.creatureIds || {};
+            moon.creatureIds[creatureId] = creatureId;
+            Creature.update(creature.id, creature).then(function() {
+                DS.update('moon', moon.id, moon)
+            })
+        }).catch(cb)
+    }).catch(function() {
+        DS.find('planet', planetId).then(function(planet) {
+            Creature.find(creatureId).then(function(creature) {})
+        }).catch(function() {
+            DS.find('star', starId).then(function(star) {
+                Creature.find(creatureId).then(function(creature) {})
+            }).catch(function() {
+                DS.find('galaxy', galaxyId).then(function(galaxy) {
+                    Creature.find(creatureId).then(function(creature) {})
+                }).catch(cb)
+            })
+        })
+    })
+}
+
 function getAll(query, cb) {
     //Use the Resource Model to get all Galaxies
     Creature.findAll({}).then(cb).catch(cb)
