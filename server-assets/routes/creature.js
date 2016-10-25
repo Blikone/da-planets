@@ -25,7 +25,7 @@ router.route('/:id?')
         })
     })
     .put(function (req, res, next) {
-        Creature.inhabitGalaxy(req.params.id, req.body, function (creature) {
+        Creature.inhabitGalaxy(req.params.id, req.body.galaxyId, function (creature) {
             if (creature.stack) { return next(creature) }
             res.send(creature)
         })

@@ -2,3 +2,5 @@
 {"id":"1c87f6f1-e58b-4874-9bf3-b6b4fcb7133c","name":"Yahoo","galaxyIds":{},"_id":"1c87f6f1-e58b-4874-9bf3-b6b4fcb7133c"}
 {"id":"83754f11-a939-4f4d-b259-fe0fd10bad14","name":"Brobdingnagian","galaxyIds":{},"_id":"83754f11-a939-4f4d-b259-fe0fd10bad14"}
 {"id":"9763f5b8-57f0-49f6-8f76-670ca6dd8e9d","name":"Hitmonchan","galaxyIds":{},"_id":"9763f5b8-57f0-49f6-8f76-670ca6dd8e9d"}
+{"id":"83754f11-a939-4f4d-b259-fe0fd10bad14","name":"Brobdingnagian","galaxyIds":{"287138b8-6514-492b-8b93-ce41ee948ad4":"287138b8-6514-492b-8b93-ce41ee948ad4"},"_id":"83754f11-a939-4f4d-b259-fe0fd10bad14"}
+{"id":"9763f5b8-57f0-49f6-8f76-670ca6dd8e9d","name":"Hitmonchan","galaxyIds":{"1e66e052-eb1e-48a1-abae-e6dc0cbbe769":"1e66e052-eb1e-48a1-abae-e6dc0cbbe769"},"_id":"9763f5b8-57f0-49f6-8f76-670ca6dd8e9d"}
