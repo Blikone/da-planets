@@ -10,10 +10,13 @@ let Creature = DS.defineResource({
     filepath: __dirname + '/../data/creatures.db',
     relations: {
         hasMany: {
-            galaxy: {
+            galaxy: [{
                 localField: 'galaxies',
                 localKeys: 'galaxyIds'
-            }
+            },{
+                localfield:'knownGalaxies',
+                foreignKeys: 'creatureIds'
+            }]
         }
     }
 })
@@ -29,6 +32,7 @@ function create(creature, cb) {
 
     Creature.create(creatureObj).then(cb).catch(cb)
 }
+
 
 
 function inhabitGalaxy(creatureId, galaxyId, cb) {

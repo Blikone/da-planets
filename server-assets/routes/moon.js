@@ -9,7 +9,7 @@ router.route('/:id?')
         if (req.params.id) {
             Moon.getById(req.params.id, req.query.include, function (moon) {
                 if (moon.stack) { return next(moon) }
-                return res.send(moon)
+                return res.send(moons)
             })
         } else {
             Moon.getAll(req.query.include, function (moons) {

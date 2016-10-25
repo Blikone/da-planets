@@ -61,13 +61,13 @@ function create(planet, cb) {
 
         let error = schemator.validateSync('Planet', planetObj);
         if (error) {
-            error.stack = true;
             return cb(error)
         }
         Planet.create(planetObj)
             .then(cb).catch(cb)
     }).catch(cb)
 }
+
 
 function getAll(query, cb) {
     //Use the Resource Model to get all Galaxies
