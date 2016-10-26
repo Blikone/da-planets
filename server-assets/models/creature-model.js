@@ -53,7 +53,7 @@ function create(creature, cb) {
 //     }).catch(cb)
 // }
 
-function inhabitLocation(creatureId, locationId, cb) {
+function inhabitLocation(creatureId, locationId, cb) { //add in "type" as a second argument to be passed in from front
     DS.find('moon', locationId).then(function (moon) {
         Creature.find(creatureId).then(function (creature) {
             creature.locationIds = creature.locationIds || {};
