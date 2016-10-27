@@ -22,9 +22,9 @@ server.get('/', function(req, res) {
 io.on('connection', function(socket) {
     console.log('A user connected');
 
-    setInterval(function() {
-        socket.emit('ping', 'The time now is either what your watch says or ' + new Date().getTime())
-    }, 5000)
+    // setInterval(function() {
+    //     socket.emit('ping', 'The time now is either what your watch says or ' + new Date().getTime())
+    // }, 5000)
 });
 
 http.listen(port, function () {
