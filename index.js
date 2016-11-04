@@ -15,9 +15,9 @@ server.use('/', express.static(`${__dirname}/public/planets/`));
 server.use('/api', cors(handlers.corsOptions), routes.router);
 server.use('/', handlers.defaultErrorHandler);
 
-server.get('/', function(req, res) {
-    res.sendfile('index.html');
-});
+// server.get('/', function(req, res) {
+//     res.sendfile('index.html');
+// });
 
 io.on('connection', function(socket) {
     console.log('A user connected');
